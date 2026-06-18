@@ -234,3 +234,77 @@
     </script>
 </body>
 </html>
+        <img class="bts-gif" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExanV6dW8ycWtweGo4Z3NjdnJ3YXc5d3VmcXNodmJ2cm81Z3EydDNsbyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/imfDnU4fSYCHPrMI5H/giphy.gif" alt="BTS">
+        
+        <h1>Alerta de Rolê Importante!</h1>
+        <p>Como diz o RM: <i>"Futuro é feito de escolhas"</i>... e a sua escolha ideal é aceitar sair comigo no domingo! Bora? 🥰</p>
+        
+        <div class="botoes">
+            <button class="btn" id="btn-sim" onclick="aceitou()">SIM!</button>
+            <button class="btn" id="btn-nao" onmouseover="fugir()" onclick="fugir()" ontouchstart="fugir()">NÃO</button>
+        </div>
+    </div>
+
+    <script>
+        function iniciarConvite() {
+            const iframe = document.getElementById('musica-fundo');
+            const fallbackBtn = document.getElementById('tocar-musica-fallback');
+
+            // Carrega diretamente o embed exato ao clicar em "Abrir".
+            iframe.src = 'https://www.youtube.com/embed/gdZLi9oWNZg?si=NodGf5T4VsHcR4ao&start=23&autoplay=1&controls=0';
+            document.getElementById('musica-container').style.display = 'block';
+            if (fallbackBtn) fallbackBtn.style.display = 'none';
+
+            document.getElementById('tela-entrada').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('tela-entrada').style.display = 'none';
+                document.getElementById('conteudo').style.display = 'flex';
+            }, 500);
+        }
+
+        function playYoutubeFallback() {
+            const iframe = document.getElementById('musica-fundo');
+            const fallbackBtn = document.getElementById('tocar-musica-fallback');
+            iframe.src = 'https://www.youtube.com/embed/gdZLi9oWNZg?si=NodGf5T4VsHcR4ao&start=23&autoplay=1&controls=0';
+            document.getElementById('musica-container').style.display = 'block';
+            fallbackBtn.style.display = 'none';
+        }
+
+        const posicoesNao = [
+            { left: 0, top: 0 },
+            { left: 0, top: 70 },
+            { left: 200, top: 0 },
+            { left: 200, top: 70 },
+            { left: 100, top: 20 },
+            { left: 100, top: 90 }
+        ];
+        let indiceNao = 0;
+
+        function fugir() {
+            const btnNao = document.getElementById('btn-nao');
+
+            if (btnNao.style.position !== 'absolute') {
+                btnNao.style.position = 'absolute';
+                btnNao.style.zIndex = '2';
+                btnNao.style.left = '200px';
+                btnNao.style.top = '0';
+            }
+
+            const pos = posicoesNao[indiceNao];
+            btnNao.style.left = `${pos.left}px`;
+            btnNao.style.top = `${pos.top}px`;
+            indiceNao = (indiceNao + 1) % posicoesNao.length;
+        }
+
+        function aceitou() {
+            const conteudo = document.getElementById('conteudo');
+            conteudo.innerHTML = `
+                <img class="bts-gif" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3l3ZHRpdDJqOWJkODVweHAxZWtydTVtbzlreHM4MnNpbGVuaTExNCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/CIEANLRwe1gc486NIa/giphy.gif" alt="BTS comemorando">
+                <h1>Uhuul! Resposta certa! 🎉</h1>
+                <p>O "Não" nem era uma opção válida mesmo. Já vou organizar tudo para domingo! Te aviso o horário. 💜 </p>
+            `;
+        }
+    </script>
+</body>
+>>>>>>> a1de746bfb7e3b13633be39447dd2f97b270e674
+</html>
