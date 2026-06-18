@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tenho um convite para você! 💜</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #120136;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            background-image: linear-gradient(rgba(18, 1, 54, 0.8), rgba(64, 13, 81, 0.8)), url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?q=80&w=1000'); /* Fundo estelar/roxo */
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Tela de Entrada (para ativar a música) */
+        #tela-entrada {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #120136;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            transition: opacity 0.5s ease;
+        }
+
+        .btn-abrir {
+            padding: 15px 30px;
+            font-size: 1.5rem;
+            background-color: #bb86fc;
+            color: #120136;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 0 20px rgba(187, 134, 252, 0.6);
+            transition: transform 0.2s;
+        }
+
+        .btn-abrir:hover {
+            transform: scale(1.1);
+        }
+
+        #musica-fundo {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Painel Principal */
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            border: 2px solid rgba(187, 134, 252, 0.3);
+            max-width: 600px; /* Mais espaço */
+            width: 90%;
+            min-height: 480px; /* Mais altura */
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            display: none; /* Começa escondido */
+            flex-direction: column;
+            justify-content: center;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #ff79c6;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .bts-gif {
+            display: block;
+            margin: 0 auto 20px;
+            width: 100%;
+            max-width: 300px;
+            border-radius: 15px;
+            border: 3px solid #bb86fc;
+        }
+
+        .botoes {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            position: relative;
+            min-height: 120px;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 12px 35px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s ease;
+        }
+
+        #btn-sim {
+            background-color: #03dac6;
+            color: #000;
+            box-shadow: 0 0 15px rgba(3, 218, 198, 0.5);
+        }
+
+        #btn-sim:hover {
+            transform: scale(1.1);
+        }
+
+        #btn-nao {
+            background-color: #ff5555;
+            color: #fff;
+            transition: top 0.4s ease, left 0.4s ease;
+            position: relative;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="tela-entrada">
+        <h2 style="margin-bottom: 20px; color: #bb86fc; text-align: center; padding: 0 20px;">Você recebeu uma mensagem especial do seu futuro namorado</h2>
+        <button class="btn-abrir" onclick="iniciarConvite()">Abrir 💜</button>
+    </div>
+
+    <div id="musica-container" style="display:none;">
+        <iframe id="musica-fundo" src="" width="560" height="315" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <button id="tocar-musica-fallback" class="btn-abrir" style="display:none; margin-top:12px; background-color:#bb86fc; color:#120136;" onclick="playYoutubeFallback()">Tocar música</button>
+    </div>
+
+    <div class="container" id="conteudo">
+        <img class="bts-gif" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExanV6dW8ycWtweGo4Z3NjdnJ3YXc5d3VmcXNodmJ2cm81Z3EydDNsbyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/imfDnU4fSYCHPrMI5H/giphy.gif" alt="BTS">
+        
+        <h1>Alerta de Rolê Importante!</h1>
+        <p>Como diz o RM: <i>"Futuro é feito de escolhas"</i>... e a sua escolha ideal é aceitar sair comigo no domingo! Bora? 🥰</p>
+        
+        <div class="botoes">
+            <button class="btn" id="btn-sim" onclick="aceitou()">SIM!</button>
+            <button class="btn" id="btn-nao" onmouseover="fugir()" onclick="fugir()" ontouchstart="fugir()">NÃO</button>
+        </div>
+    </div>
+
+    <script>
+        function iniciarConvite() {
+            const iframe = document.getElementById('musica-fundo');
+            const fallbackBtn = document.getElementById('tocar-musica-fallback');
+
+            // Carrega diretamente o embed exato ao clicar em "Abrir".
+            iframe.src = 'https://www.youtube.com/embed/gdZLi9oWNZg?si=NodGf5T4VsHcR4ao&start=23&autoplay=1&controls=0';
+            document.getElementById('musica-container').style.display = 'block';
+            if (fallbackBtn) fallbackBtn.style.display = 'none';
+
+            document.getElementById('tela-entrada').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('tela-entrada').style.display = 'none';
+                document.getElementById('conteudo').style.display = 'flex';
+            }, 500);
+        }
+
+        function playYoutubeFallback() {
+            const iframe = document.getElementById('musica-fundo');
+            const fallbackBtn = document.getElementById('tocar-musica-fallback');
+            iframe.src = 'https://www.youtube.com/embed/gdZLi9oWNZg?si=NodGf5T4VsHcR4ao&start=23&autoplay=1&controls=0';
+            document.getElementById('musica-container').style.display = 'block';
+            fallbackBtn.style.display = 'none';
+        }
+
+        const posicoesNao = [
+            { left: 0, top: 0 },
+            { left: 0, top: 70 },
+            { left: 200, top: 0 },
+            { left: 200, top: 70 },
+            { left: 100, top: 20 },
+            { left: 100, top: 90 }
+        ];
+        let indiceNao = 0;
+
+        function fugir() {
+            const btnNao = document.getElementById('btn-nao');
+
+            if (btnNao.style.position !== 'absolute') {
+                btnNao.style.position = 'absolute';
+                btnNao.style.zIndex = '2';
+                btnNao.style.left = '200px';
+                btnNao.style.top = '0';
+            }
+
+            const pos = posicoesNao[indiceNao];
+            btnNao.style.left = `${pos.left}px`;
+            btnNao.style.top = `${pos.top}px`;
+            indiceNao = (indiceNao + 1) % posicoesNao.length;
+        }
+
+        function aceitou() {
+            const conteudo = document.getElementById('conteudo');
+            conteudo.innerHTML = `
+                <img class="bts-gif" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3l3ZHRpdDJqOWJkODVweHAxZWtydTVtbzlreHM4MnNpbGVuaTExNCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/CIEANLRwe1gc486NIa/giphy.gif" alt="BTS comemorando">
+                <h1>Uhuul! Resposta certa! 🎉</h1>
+                <p>O "Não" nem era uma opção válida mesmo. Já vou organizar tudo para domingo! Te aviso o horário. 💜 </p>
+            `;
+        }
+    </script>
+</body>
+</html>
