@@ -156,8 +156,7 @@
     </div>
 
     <div id="musica-container" style="display:none;">
-        <iframe id="musica-fundo" src="" width="560" height="315" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        <button id="tocar-musica-fallback" class="btn-abrir" style="display:none; margin-top:12px; background-color:#bb86fc; color:#120136;" onclick="playYoutubeFallback()">Tocar música</button>
+        <audio id="audio-fundo" src="MP3/Dynamite.mp3" preload="auto"></audio>
     </div>
 
     <div class="container" id="conteudo">
@@ -174,27 +173,20 @@
 
     <script>
         function iniciarConvite() {
-            const iframe = document.getElementById('musica-fundo');
-            const fallbackBtn = document.getElementById('tocar-musica-fallback');
+            const audio = document.getElementById('audio-fundo');
 
-            // Carrega diretamente o embed exato ao clicar em "Abrir".
-            iframe.src = 'https://www.youtube.com/embed/gdZLi9oWNZg?si=NodGf5T4VsHcR4ao&start=23&autoplay=1&controls=0';
+            audio.currentTime = 23;
+            audio.play().catch(() => {
+                // Se autoplay for bloqueado, deixamos o usuário abrir normalmente.
+            });
+
             document.getElementById('musica-container').style.display = 'block';
-            if (fallbackBtn) fallbackBtn.style.display = 'none';
 
             document.getElementById('tela-entrada').style.opacity = '0';
             setTimeout(() => {
                 document.getElementById('tela-entrada').style.display = 'none';
                 document.getElementById('conteudo').style.display = 'flex';
             }, 500);
-        }
-
-        function playYoutubeFallback() {
-            const iframe = document.getElementById('musica-fundo');
-            const fallbackBtn = document.getElementById('tocar-musica-fallback');
-            iframe.src = 'https://www.youtube.com/embed/gdZLi9oWNZg?si=NodGf5T4VsHcR4ao&start=23&autoplay=1&controls=0';
-            document.getElementById('musica-container').style.display = 'block';
-            fallbackBtn.style.display = 'none';
         }
 
         const posicoesNao = [
